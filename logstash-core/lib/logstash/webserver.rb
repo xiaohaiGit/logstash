@@ -192,6 +192,8 @@ module LogStash
       ::Puma::Server.new(@app, events)
     end
 
+
+
     def create_server_thread
       server_thread = nil
       @mutex.synchronize do
