@@ -341,7 +341,7 @@ tasks.register("installDefaultGems") {
 tasks.register("installTestGems") {
     dependsOn bootstrap
     doLast {
-      rake(projectDir, buildDir, 'plugin:install-development-dependencies')
+        rake(projectDir, buildDir, 'plugin:install-development-dependencies')
   }
 }
 

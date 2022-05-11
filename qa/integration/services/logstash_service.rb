@@ -247,7 +247,6 @@ class LogstashService < Service
     if ENV.key?("BUILD_JAVA_HOME") && !process.environment.key?("LS_JAVA_HOME")
       process.environment["LS_JAVA_HOME"] = ENV["BUILD_JAVA_HOME"]
     end
-    # process.io.inherit!
     process.io.stdout = process.io.stderr = out
 
     Bundler.with_unbundled_env do
@@ -260,12 +259,7 @@ class LogstashService < Service
       end
     end
 
-    # wrapping for debug
-    begin
-      process.poll_for_exit(TIMEOUT_MAXIMUM)
-    rescue => e
-      puts e.inspect
-    end
+    process.poll_for_exit(TIMEOUT_MAXIMUM)
     out.rewind
     ProcessStatus.new(process.exit_code, out.read)
   end
