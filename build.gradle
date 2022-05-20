@@ -730,11 +730,12 @@ class JDKDetails {
     String createDownloadUrl() {
         switch (vendor) {
             case "adoptopenjdk":
+            case "adoptium":
                 String releaseName = major > 8 ?
                         "jdk-${revision}+${build}":
                         "jdk${revision}u${build}"
                 String adoptOsName = adaptOsName(osName)
-                return "https://api.adoptopenjdk.net/v3/binary/version/${releaseName}/${adoptOsName}/${arch}/jdk/hotspot/normal/${vendor}"
+                return "https://api.${vendor}.net/v3/binary/version/${releaseName}/${adoptOsName}/${arch}/jdk/hotspot/normal/${vendor}"
             default:
                 throw RuntimeException("Can't handle vendor: ${vendor}")
         }
